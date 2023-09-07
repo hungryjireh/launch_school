@@ -1,0 +1,88 @@
+1. a function that returns the sum of two numbers
+
+START
+# Given 2 numbers called number1 and number2
+SET sum = number1 + number2
+PRINT sum
+
+END
+
+2. a function that takes an array of strings, and returns a string
+that is all those strings concatenated together
+
+START
+# Given an array of strings called "strings"
+
+SET iterator = 1
+SET output
+WHILE iterator <= length of strings
+  SET currentString = value within strings array at index "iterator"
+  output = output + currentString
+PRINT output
+
+END
+
+3. a method that takes an array of integers, and returns a new array
+with every other element from the original array,
+starting with the first element. For instance:
+everyOther([1,4,7,2,5]); // => [1,7,5]
+
+START
+# Given an array of integers called "numbers"
+
+SET iterator = 1
+SET output = []
+WHILE iterator <= length of strings
+  SET currentInteger = value within integers array at index "iterator"
+  IF iterator % 2 === 0
+    add currentInteger to output array    
+PRINT output
+
+END
+
+4. a function that determines the index of the 3rd occurrence 
+of a given character in a string. For instance, 
+if the given character is 'x' and the string is 'axbxcdxex',
+the function should return 6 (the index of the 3rd 'x'). 
+If the given character does not occur at least 3 times, 
+return null.
+
+START
+# Given a string called evalString and character to check for 
+called evalChar
+
+SET iterator = 1
+SET counter = 0
+SET index = null
+WHILE iterator <= length of evalString
+  SET currentChar = character within evalString at index "iterator"
+  IF currentChar === evalChar
+    counter = counter + 1
+    IF counter === 3:
+      index = iterator
+PRINT index
+
+END
+
+5. a function that takes two arrays of numbers and
+returns the result of merging the arrays. The elements of
+the first array should become the elements at the
+even indexes of the returned array, while the elements of
+the second array should become the elements at the odd indexes. 
+For instance: merge([1, 2, 3], [4, 5, 6]); // => [1, 4, 2, 5, 3, 6]
+You may assume that both array arguments have the same number of elements.
+
+START
+# Given two arrays of integers with the same length - "numbers1" and "numbers2"
+
+SET iterator = 1
+SET output = []
+SET subArrayLength = length of first array
+WHILE iterator <= subArrayLength
+  SET currentNumber1 = number in numbers1 at index "iterator"
+  add currentNumber1 to output array
+  SET currentNumber2 = number in numbers2 at index "iterator"
+  add currentNumber2 to output array
+PRINT output
+
+END
