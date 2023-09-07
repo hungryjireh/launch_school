@@ -1,0 +1,24 @@
+{
+  "getLanguage": "Select a language:\n1) English 2) Chinese",
+  "getLanguageError": "Must choose 1 or 2",
+  "1": {
+    "welcomeMessage": "Welcome to Calculator!",
+    "getFirstNumber": "What's the first number?",
+    "getSecondNumber": "What's the second number?",
+    "getNumberError": "Hmm... that doesn't look like a valid number",
+    "getOperation": "What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide",
+    "getOperationError": "Must choose 1, 2, 3 or 4",
+    "result": "The result is",
+    "performAnotherCalculation": "Would you like to perform another calculation?"
+  },
+  "2": {
+    "welcomeMessage": "欢迎到计算机！",
+    "getFirstNumber": "请选第一个号码。",
+    "getSecondNumber": "请选第二个号码。",
+    "getNumberError": "这看起来不是个号码。。。",
+    "getOperation": "您想要执行什么数学运算？\n1) 加 2) 扣 3) 乘 4) 除",
+    "getOperationError": "要选一，二，三或四",
+    "result": "答案是",
+    "performAnotherCalculation": "您想再进行一次计算吗？"
+  }
+}
