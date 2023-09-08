@@ -1,0 +1,72 @@
+Question 1
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let myWord = 'Hello';
+let myOtherWord = myWord;
+
+console.log(myWord); // 'Hello'
+console.log(myOtherWord); // 'Hello'
+
+Both myWord and myOtherWord are different strings stored in separate memory addresses, but both have the same value.
+
+Question 2
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let myWord = 'Hello';
+let myOtherWord = myWord;
+myWord = 'Goodbye';
+
+console.log(myWord); // 'Goodbye'
+console.log(myOtherWord); // 'Hello'
+
+Both myWord and myOtherWord are different strings stored in separate memory addresses, hence when myWord is reassigned a new memory address with the value 'Goodbye', myOtherWord retains the same value at its unique memory address of 'Hello'.
+
+Question 3**
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let myWords = ['Hello', 'Goodbye'];
+let myOtherWords = myWords;
+myWords[0] = 'Hi';
+
+console.log(myWords); // ['Hi', 'Goodbye']
+console.log(myOtherWords); // ['Hello', 'Goodbye']
+
+ANSWER: This logs the array [ 'Hi', 'Goodbye' ] twice.
+
+In some ways this looks similar to Exercise 2. There are a couple of key differences though:
+
+The fact that myWords is initialized to an array, which is a reference type.
+What we then do with myWords on line 3.
+With reference types, the value stored in memory that the variable points to is a reference to another location in memory. After line 2, both variables have as their value the memory address where the array is stored.
+
+On line 3, we're not reassigning the myWords variable, instead we're changing the value of one of the array elements that the myWords variable references.
+
+Because we've changed, or mutated, the array, and because both variables reference the same array, when we log both variables we get the same output.
+
+Question 4
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let myWords = ['Hello', 'Goodbye'];
+let myOtherWords = myWords; // same memory address
+myWords = ['Hi', 'Bye'];
+
+console.log(myWords); // ['Hi', 'Bye']
+console.log(myOtherWords); // ['Hello', 'Goodbye']
+
+ANSWER: As with Exercise 3, we're again dealing with a reference type. 
+Again, after line 2, both variables have as their value the memory address where the array is stored. 
+In this exercise though, line 3 reassigns the myWords variable to a different value. 
+In this case we're reassigning it to another array, but we could equally have reassigned it to a primitive value. The important point is that the variable now points to a different value and so the two variable no longer have the same value (the memory address where the ['Hello', 'Goodbye'] array is stored). When we log each variable, different values are therefore output.
+
+Question 5
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let myWords = ['Hello', 'Goodbye'];
+let myWord = myWords[0];
+myWords[0] = 'Hi';
+
+console.log(myWords); // ['Hi', 'Goodbye']
+console.log(myWord); // 'Hello'
+
+myword is stored in a separate memory address, with a value taken from the first element in myWords.
+myWords is an object whose first element is modified.
