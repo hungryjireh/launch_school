@@ -24,7 +24,35 @@ function getNumber(language) {
   return number;
 }
 
-function operationResult(number1, number2, operation) {
+function getLanguage() {
+  prompt(CALCULATOR_MESSAGES.getLanguage);
+  let language = readline.question();
+
+  while (!['1', '2'].includes(language)) {
+    prompt(CALCULATOR_MESSAGES.getLanguageError);
+    language = readline.question();
+  }
+
+  switch (language) {
+    case "1":
+      return "en";
+    case "2":
+      return "cn";
+  }
+
+  return null;
+}
+
+function getContinueCalculation(language) {
+  prompt(CALCULATOR_MESSAGES[language].performAnotherCalculation);
+  let checkContinueCalculator = readline.question();
+  if (checkContinueCalculator && !['yes', 'y'].includes(checkContinueCalculator.toLowerCase())) {
+    return false;
+  }
+  return true;
+}
+
+function calculateResult(number1, number2, operation) {
   let output;
   switch (operation) {
     case '1':
@@ -57,25 +85,19 @@ function calculator(language) {
     operation = readline.question();
   }
 
-  const output = operationResult(number1, number2, operation);
+  const output = calculateResult(number1, number2, operation);
   prompt(`${CALCULATOR_MESSAGES[language].result} ${output}.`);
 }
 
-prompt(CALCULATOR_MESSAGES.getLanguage);
-let language = readline.question();
-while (!['1', '2'].includes(language)) {
-  prompt(CALCULATOR_MESSAGES.getLanguageError);
-  language = readline.question();
-}
+const language = getLanguage();
 
 prompt(CALCULATOR_MESSAGES[language].welcomeMessage);
-let continueCalculator = true;
-while (continueCalculator) {
+
+while (true) {
   calculator(language);
 
-  prompt(CALCULATOR_MESSAGES[language].performAnotherCalculation);
-  let checkContinueCalculator = readline.question();
-  if (checkContinueCalculator && !['yes', 'y'].includes(checkContinueCalculator.toLowerCase())) {
-    continueCalculator = false;
+  const continueCalculation = getContinueCalculation(language);
+  if (!continueCalculation) {
+    break;
   }
 }
