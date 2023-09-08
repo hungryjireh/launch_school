@@ -1,0 +1,63 @@
+Question 1
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let myWord = 'Hello';
+myWord.concat(' there.');
+
+console.log(myWord); // 'Hello' - myWord.concat returns a new string "Hello there", which was not reassigned to myWord
+
+Question 2
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let myWord = 'Hello';
+myWord.repeat(3);
+console.log(myWord); // 'Hello'
+myWord.replace('H', 'J'); 
+console.log(myWord); // 'Hello'
+myWord.toUpperCase();
+console.log(myWord); // 'Hello'
+
+A new string is created each time, but were not reassigned to myWord.
+
+Question 3
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let myWords = ['Hello'];
+myWords.push('Goodbye');
+
+console.log(myWords); // ['Hello', 'Goodbye']. myWords is an object, which is mutable.
+
+Question 4**
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let myWords = ['Hello'];
+myWords.concat(['Goodbye']);
+
+console.log(myWords); // ['Hello']. myWords is coerced to a string and concatenated with ['Goodbye'], another object coerced into a string. 
+However, this creates a new string, which will not mutate the original myWords variable.
+
+ANSWER: This logs [ 'Hello' ] to the console. 
+Although myWords is assigned to an array, which is an object and therefore mutable, the Array.concat method doesn't mutate the array it is called on; it instead returns a new array.
+Just because objects are mutable, we shouldn't assume that all methods called on an object will mutate it.
+
+Question 5**
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let myWords = ['Hello'];
+myWords[0].toUpperCase();
+
+console.log(myWords); // ['HELLO'] - myWords is an array, which is an object and is mutable.
+
+ANSWER: This logs [ 'Hello' ] to the console. 
+Although myWords is assigned to an array, which is an object and therefore mutable, we're actually calling the toUpperCase() method on the string at index 0 of the array. 
+Being primitive types, strings are immutable, so the method has no effect on the string (it instead returns a new string), and we're not mutating the array or changing the value at index 0.
+
+Question 6
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let myWords = ['Hello'];
+myWords[0] = myWords[0].toUpperCase();
+
+console.log(myWords); // ['HELLO'] - myWords at index 0 is reassigned the new primitive string 'HELLO', which is the result of myWords[0].toUpperCase().
+Since myWords is an array and is mutable, the updated array ['HELLO'] is logged to the console.
+
