@@ -1,0 +1,101 @@
+Question 1
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let num = 5;
+
+function myFunc() {
+  num = 10;
+}
+
+myFunc();
+console.log(num); --> 10. Inner scope reassigned value in outer scope.
+
+Question 2
+
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let num = 5;
+
+function myFunc() {
+  console.log(num); // 5. Outer scope value, which has not been modified, is accessible from inner scope.
+  num = 10;
+}
+
+myFunc();
+console.log(num); // 10. Inner scope reassigned value in outer scope.
+
+Question 3
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let num = 5;
+
+function myFunc() {
+  let num = 10;
+}
+
+myFunc();
+console.log(num); // 5. Inner scope variable "num" shadows outer scope variable with the same name, hence inner scope value is only accessible from within the function and does not modify outer scope value.
+
+Question 4**
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let num = 5;
+
+function myFunc() {
+  console.log(num); // 5. Outer scope value, which has not been modified, is accessible from inner scope.
+  let num = 10;
+}
+
+myFunc();
+console.log(num); // 5. Inner scope variable "num" shadows outer scope variable with the same name, hence inner scope value is only accessible from within the function and does not modify outer scope value.
+
+**FOR REVIEW - Actual answer:
+- This won't log anything to the console. Instead, this code will raise a ReferenceError. 
+The let declaration on line 5 creates a new num variable within the scope of the body of the myFunc function. 
+The console.log on line 4 is attempting to log the value of that num variable, not the one declared and initialized on line one. 
+Since the variable hasn't been initialized yet however, we get a reference error:
+ReferenceError: Cannot access 'num' before initialization
+
+Question 5
+
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let num = 5;
+
+function myFunc(num) {
+  num = 10;
+}
+
+myFunc();
+console.log(num); // 5. The reassignment of num in myFunc is only valid within the scope of the function, since num is passed as a parameter within the function.
+
+Question 6
+
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let num = 1;
+
+while (num < 3) {
+  num += 1;
+}
+
+console.log(num); // 3. Outer scope variable num is modified by the while loop.
+
+Question 7
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let num = 1;
+
+while (num < 3) {
+  let num = 5;
+  num += 1;
+}
+
+console.log(num); // Nothing will be printed.
+
+What happens is:
+1. num variable is created in the outer/global scope where num = 1
+2. while loop condition is met as num < 3
+3. New num variable is created, which shadows outer scope num variable
+4. Inner scope num variable is incremented (num = 6)
+5. num < 3 is still true as outer scope variable has not been modified, thus resulting in an infinite loop
