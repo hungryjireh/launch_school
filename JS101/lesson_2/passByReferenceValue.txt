@@ -1,0 +1,80 @@
+Question 1
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+function changeMyWord(word) {
+  console.log(word);
+  word = word.toUpperCase();
+}
+
+let myWord = 'Hello';
+changeMyWord(myWord); // 'Hello'
+console.log(myWord); // 'Hello'
+
+'word' within changeMyWord was not modified before the console.log statement, hence it printed the input as it is.
+myWord was not reassigned, hence its value is also unchanged.
+
+Question 2
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+function changeMyWord(word) {
+  console.log(word); // 'Hello'
+  word = word.toUpperCase();
+  return word;
+}
+
+let myWord = 'Hello';
+myWord = changeMyWord(myWord);
+console.log(myWord); // 'HELLO'
+
+'word' within changeMyWord was not modified before the console.log statement, hence it printed the input as it is.
+myWord was reassigned with the result of changeMyWord.
+
+Question 3
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+function changeMyWord(word) {
+  console.log(word); // 'Hello'
+  word = word.toUpperCase();
+  return word;
+}
+
+let myWord = 'Hello';
+let myOtherWord = changeMyWord(myWord);
+console.log(myWord); // 'Hello'
+console.log(myOtherWord); // 'HELLO'
+
+'word' within changeMyWord was not modified before the console.log statement, hence it printed the input as it is.
+myWord was reassigned with the result of changeMyWord.
+Since we are using pass by value, myWord outside of the function block is not affected by the operations of changeMyWord, as it is not reassigned.
+
+Question 4
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+function changeMyWords(words) {
+  console.log(words); // ['Hello', 'Goodbye']
+  words[0] = 'Hi';
+}
+
+let myWords = ['Hello', 'Goodbye'];
+changeMyWords(myWords);
+console.log(myWords); // ['Hi', 'Goodbye']
+
+'words' within changeMyWords was not modified before the console.log statement, hence it printed the input as it is.
+The first element in myWords was updated with the value 'Hi'. Since myWords is an object, this is pass by reference and myWords is updated outside the function block as well.
+** The myWords variable and the words function parameter both point to the same array. 
+
+Question 5
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+function changeMyWords(words) {
+  console.log(words); // ['Hello', 'Goodbye']
+  words = ['Hi', 'Goodbye'];
+}
+
+let myWords = ['Hello', 'Goodbye'];
+changeMyWords(myWords);
+console.log(myWords); // ['Hello', 'Goodbye']
+
+'words' within changeMyWords was not modified before the console.log statement, hence it printed the input as it is.
+Within the function changeMyWords, the parameter was reassigned with the value ['Hi', 'Goodbye'], and it does not affect the variable outside the function block.
+As such, myWords is not updated and retains the same value of ['Hello', 'Goodbye']
