@@ -7,6 +7,21 @@ const LIZARD = "lizard";
 const SPOCK = "spock";
 const VALID_CHOICES = [ROCK, PAPER, SCISSORS, LIZARD, SPOCK];
 
+const ROCK_SHORTENED = "r";
+const PAPER_SHORTENED = "p";
+const SCISSORS_SHORTENED = "sc";
+const LIZARD_SHORTENED = "l";
+const SPOCK_SHORTENED = "sp";
+const VALID_SHORTENED_CHOICES = [ROCK_SHORTENED, PAPER_SHORTENED,
+  SCISSORS_SHORTENED, LIZARD_SHORTENED, SPOCK_SHORTENED];
+const SHORTENED_CHOICES_MAP = {
+  r: ROCK,
+  p: PAPER,
+  sc: SCISSORS,
+  l: LIZARD,
+  sp: SPOCK
+};
+
 const PLAYER = "player";
 const COMPUTER = "computer";
 const TIE = "tie";
@@ -29,12 +44,18 @@ function prompt(message) {
 }
 
 function getChoice() {
-  prompt(`Choose one: ${VALID_CHOICES.join(", ")}`);
+  const displayChoiceInputs = VALID_CHOICES.map((choice, index) => `${choice}|${VALID_SHORTENED_CHOICES[index]}`);
+  prompt(`Choose one: ${displayChoiceInputs.join(", ")}`);
   let choice = readline.question();
 
-  while (!VALID_CHOICES.includes(choice)) {
+  while (!VALID_CHOICES.includes(choice) &&
+    !VALID_SHORTENED_CHOICES.includes(choice)) {
     prompt("That's not a valid choice");
     choice = readline.question();
+  }
+
+  if (VALID_SHORTENED_CHOICES.includes(choice)) {
+    choice = SHORTENED_CHOICES_MAP[choice];
   }
 
   return choice;
