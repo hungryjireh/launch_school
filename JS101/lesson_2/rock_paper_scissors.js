@@ -31,7 +31,7 @@ let SCORE = {
   computer: 0
 };
 
-const WINNER_VALUES = {
+const WINNER_COMBOS = {
   rock: [SCISSORS, LIZARD],
   paper: [ROCK, SPOCK],
   scissors: [PAPER, LIZARD],
@@ -46,12 +46,12 @@ function prompt(message) {
 function getChoice() {
   const displayChoiceInputs = VALID_CHOICES.map((choice, index) => `${choice}|${VALID_SHORTENED_CHOICES[index]}`);
   prompt(`Choose one: ${displayChoiceInputs.join(", ")}`);
-  let choice = readline.question();
+  let choice = readline.question().toLowerCase();
 
   while (!VALID_CHOICES.includes(choice) &&
     !VALID_SHORTENED_CHOICES.includes(choice)) {
     prompt("That's not a valid choice");
-    choice = readline.question();
+    choice = readline.question().toLowerCase();
   }
 
   if (VALID_SHORTENED_CHOICES.includes(choice)) {
@@ -95,11 +95,14 @@ function updateAndDisplayScore(winner) {
   prompt(`The score is: ${JSON.stringify(SCORE)}`);
 }
 
-function displayGrandWinner() {
-  if (SCORE[PLAYER] === 3) {
-    prompt('You are the grand winner!');
-  } else if (SCORE[COMPUTER] === 3) {
-    prompt('Computer is the grand winner!');
+function displayGrandWinner(winner) {
+  switch (winner) {
+    case PLAYER:
+      prompt('You are the grand winner!');
+      break;
+    case COMPUTER:
+      prompt('Computer is the grand winner!');
+      break;
   }
 }
 
@@ -124,7 +127,7 @@ function getWinner(choice, computerChoice) {
   if (choice === computerChoice) {
     return TIE;
   } else {
-    const winnerValuesForPlayer = WINNER_VALUES[choice];
+    const winnerValuesForPlayer = WINNER_COMBOS[choice];
     if (winnerValuesForPlayer.includes(computerChoice)) {
       return PLAYER;
     }
@@ -142,15 +145,22 @@ function playRockPaperScissors() {
   displayWinner(winner);
   updateAndDisplayScore(winner);
 
-  if (SCORE[PLAYER] === 3 || SCORE[COMPUTER] === 3) {
-    displayGrandWinner();
+  const playerWins = SCORE[PLAYER] === 3;
+  const computerWins = SCORE[COMPUTER] === 3;
+  if (playerWins || computerWins) {
+    displayGrandWinner(winner);
     resetScore();
   }
 }
 
-while (true) {
-  playRockPaperScissors();
+function runProgram() {
+  console.clear();
+  while (true) {
+    playRockPaperScissors();
 
-  const playAgainAnswer = getPlayAgainAnswer();
-  if (playAgainAnswer[0] !== 'y') break;
+    const playAgainAnswer = getPlayAgainAnswer();
+    if (playAgainAnswer[0] !== 'y') break;
+  }
 }
+
+runProgram();
