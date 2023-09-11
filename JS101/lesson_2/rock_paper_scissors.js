@@ -1,23 +1,114 @@
 const readline = require('readline-sync');
 
-const VALID_CHOICES = ['rock', 'paper', 'scissors'];
+const ROCK = "rock";
+const PAPER = "paper";
+const SCISSORS = "scissors";
+const LIZARD = "lizard";
+const SPOCK = "spock";
+const VALID_CHOICES = [ROCK, PAPER, SCISSORS, LIZARD, SPOCK];
+
+const PLAYER = "player";
+const COMPUTER = "computer";
+const TIE = "tie";
 
 function prompt(message) {
   console.log(`=> ${message}`);
 }
 
-function displayWinner(choice, computerChoice) {
-  if ((choice === 'rock' && computerChoice === 'scissors') ||
-      (choice === 'paper' && computerChoice === 'rock') ||
-      (choice === 'scissors' && computerChoice === 'paper')) {
-    return "player";
-  } else if ((choice === 'rock' && computerChoice === 'paper') ||
-  (choice === 'paper' && computerChoice === 'scissors') ||
-  (choice === 'scissors' && computerChoice === 'rock')) {
-    return "computer";
-  } else {
-    return "tie";
+function getResultPlayerRock(computerChoice) {
+  switch (computerChoice) {
+    case SCISSORS:
+      return PLAYER;
+    case LIZARD:
+      return PLAYER;
+    case SPOCK:
+      return COMPUTER;
+    case PAPER:
+      return COMPUTER;
+    case ROCK:
+      return TIE;
   }
+  return null;
+}
+
+function getResultPlayerScissors(computerChoice) {
+  switch (computerChoice) {
+    case SCISSORS:
+      return TIE;
+    case LIZARD:
+      return PLAYER;
+    case SPOCK:
+      return COMPUTER;
+    case PAPER:
+      return PLAYER;
+    case ROCK:
+      return COMPUTER;
+  }
+  return null;
+}
+
+function getResultPlayerPaper(computerChoice) {
+  switch (computerChoice) {
+    case SCISSORS:
+      return COMPUTER;
+    case LIZARD:
+      return COMPUTER;
+    case SPOCK:
+      return PLAYER;
+    case PAPER:
+      return TIE;
+    case ROCK:
+      return PLAYER;
+  }
+  return null;
+}
+
+function getResultPlayerSpock(computerChoice) {
+  switch (computerChoice) {
+    case SCISSORS:
+      return PLAYER;
+    case LIZARD:
+      return COMPUTER;
+    case SPOCK:
+      return TIE;
+    case PAPER:
+      return COMPUTER;
+    case ROCK:
+      return PLAYER;
+  }
+  return null;
+}
+
+function getResultPlayerLizard(computerChoice) {
+  switch (computerChoice) {
+    case SCISSORS:
+      return COMPUTER;
+    case LIZARD:
+      return TIE;
+    case SPOCK:
+      return PLAYER;
+    case PAPER:
+      return PLAYER;
+    case ROCK:
+      return COMPUTER;
+  }
+  return null;
+}
+
+function getWinner(choice, computerChoice) {
+  switch (choice) {
+    case SCISSORS:
+      return getResultPlayerScissors(computerChoice);
+    case LIZARD:
+      return getResultPlayerLizard(computerChoice);
+    case SPOCK:
+      return getResultPlayerSpock(computerChoice);
+    case PAPER:
+      return getResultPlayerPaper(computerChoice);
+    case ROCK:
+      return getResultPlayerRock(computerChoice);
+  }
+  return null;
 }
 
 let continuePlay = true;
@@ -43,7 +134,7 @@ while (continuePlay) {
 
   prompt(`You chose ${choice}, computer chose ${computerChoice}`);
 
-  const winner = displayWinner(choice, computerChoice);
+  const winner = getWinner(choice, computerChoice);
   switch (winner) {
     case "player":
       prompt("You win!");
@@ -58,7 +149,7 @@ while (continuePlay) {
 
   prompt('Do you want to play again (y/n)?');
   let answer = readline.question().toLowerCase();
-  while (answer && answer[0] !== 'n' && answer[0] !== 'y') {
+  while (answer[0] !== 'n' && answer[0] !== 'y') {
     prompt('Please enter "y" or "n".');
     answer = readline.question().toLowerCase();
   }
