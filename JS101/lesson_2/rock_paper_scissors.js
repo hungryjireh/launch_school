@@ -11,104 +11,28 @@ const PLAYER = "player";
 const COMPUTER = "computer";
 const TIE = "tie";
 
+const WINNER_VALUES = {
+  rock: [SCISSORS, LIZARD],
+  paper: [ROCK, SPOCK],
+  scissors: [PAPER, LIZARD],
+  spock: [SCISSORS, ROCK],
+  lizard: [SPOCK, PAPER]
+};
+
 function prompt(message) {
   console.log(`=> ${message}`);
 }
 
-function getResultPlayerRock(computerChoice) {
-  switch (computerChoice) {
-    case SCISSORS:
-      return PLAYER;
-    case LIZARD:
-      return PLAYER;
-    case SPOCK:
-      return COMPUTER;
-    case PAPER:
-      return COMPUTER;
-    case ROCK:
-      return TIE;
-  }
-  return null;
-}
-
-function getResultPlayerScissors(computerChoice) {
-  switch (computerChoice) {
-    case SCISSORS:
-      return TIE;
-    case LIZARD:
-      return PLAYER;
-    case SPOCK:
-      return COMPUTER;
-    case PAPER:
-      return PLAYER;
-    case ROCK:
-      return COMPUTER;
-  }
-  return null;
-}
-
-function getResultPlayerPaper(computerChoice) {
-  switch (computerChoice) {
-    case SCISSORS:
-      return COMPUTER;
-    case LIZARD:
-      return COMPUTER;
-    case SPOCK:
-      return PLAYER;
-    case PAPER:
-      return TIE;
-    case ROCK:
-      return PLAYER;
-  }
-  return null;
-}
-
-function getResultPlayerSpock(computerChoice) {
-  switch (computerChoice) {
-    case SCISSORS:
-      return PLAYER;
-    case LIZARD:
-      return COMPUTER;
-    case SPOCK:
-      return TIE;
-    case PAPER:
-      return COMPUTER;
-    case ROCK:
-      return PLAYER;
-  }
-  return null;
-}
-
-function getResultPlayerLizard(computerChoice) {
-  switch (computerChoice) {
-    case SCISSORS:
-      return COMPUTER;
-    case LIZARD:
-      return TIE;
-    case SPOCK:
-      return PLAYER;
-    case PAPER:
-      return PLAYER;
-    case ROCK:
-      return COMPUTER;
-  }
-  return null;
-}
-
 function getWinner(choice, computerChoice) {
-  switch (choice) {
-    case SCISSORS:
-      return getResultPlayerScissors(computerChoice);
-    case LIZARD:
-      return getResultPlayerLizard(computerChoice);
-    case SPOCK:
-      return getResultPlayerSpock(computerChoice);
-    case PAPER:
-      return getResultPlayerPaper(computerChoice);
-    case ROCK:
-      return getResultPlayerRock(computerChoice);
+  if (choice === computerChoice) {
+    return TIE;
+  } else {
+    const winnerValuesForPlayer = WINNER_VALUES[choice];
+    if (winnerValuesForPlayer.includes(computerChoice)) {
+      return PLAYER;
+    }
+    return COMPUTER;
   }
-  return null;
 }
 
 let continuePlay = true;
