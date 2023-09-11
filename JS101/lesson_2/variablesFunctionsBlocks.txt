@@ -1,0 +1,194 @@
+Question 1
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let color = 'yellow';
+let colors = ['red', 'green', 'blue'];
+
+function updateColors(colors) {
+  colors.push(color);
+}
+
+updateColors(colors); 
+console.log(colors); // ['red', 'green', 'blue', 'yellow']
+
+Colors is a pass-by-reference, hence colors in the function block and outside of the function block are pointing to the same array
+Arrays.prototype.push is a destructive method, hence colors is updated outside of the function block as well.
+
+Question 2**
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let color = 'yellow';
+let colors = ['red', 'green', 'blue'];
+
+function updateColors(colors, color) {
+  colors.push(color);
+}
+
+updateColors(colors);
+console.log(colors); // ['red', 'green', 'blue', 'yellow']
+
+Similar to question 1.
+The difference is that a new variable 'color' is created within the function block, which shadows the 'color' variable outside of the function scope.
+Colors is a pass-by-reference, hence colors in the function block and outside of the function block are pointing to the same array
+Arrays.prototype.push is a destructive method, hence colors is updated outside of the function block as well.
+
+** color is not passed into updateColors. Hence, color is undefined and the array, which is a pass by reference, will be updated with the value 'undefined' instead.
+ANSWER:
+This logs the array ['red', 'green', 'blue', undefined].
+
+The code in this example is almost identical to the code example in Exercise 1, with one key difference: the updateColors function defines a second parameter color. As with Exercise 1, the colors function parameter blocks access to the global colors variable. In the case though, the color function parameter also blocks access to the color global variable.
+
+When we invoke the function, however, we only pass in one argument, the variable colors which references the array ['red', 'green', 'blue']. As before, we call the push method on this array, but rather than pass in the color global variable (which points to the string 'yellow') we instead pass in the color parameter. Since we didn't pass in an argument for color when invoking the function, this parameter has a value of undefined.
+
+The array is still modified, as in Exercise 1, so when we log the colors global variable on line 9 we again see the modified value, but the last element is undefined instead of 'yellow'.
+
+Question 3
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let color1 = 'purple';
+let color2 = 'pink';
+let colors = ['red', 'green', 'blue'];
+
+function updateColors(colors, color) {
+  colors.push(color);
+}
+
+updateColors(colors, color1);
+updateColors(colors, color2);
+console.log(colors); // ['red', 'green', 'blue', 'purple', 'pink']
+
+Color1 and color2 are passed into the function updateColors respectively as the parameter 'color'.
+Arrays.prototype.push is a destructive method, hence colors is updated outside of the function block as well.
+colors is first updated to ['red', 'green', 'blue', 'purple'].
+Subsequently, the updated reference is passed to the next function call, and it is then updated to ['red', 'green', 'blue', 'purple', 'pink']
+
+Question 4
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let color1 = 'purple';
+let color2 = 'pink';
+let colors = ['red', 'green', 'blue'];
+
+function updateColors(colors, color) {
+  colors.push(color);
+  return colors;
+}
+
+let newColors = updateColors(colors, color1);
+updateColors(newColors, color2);
+console.log(colors); // ['red', 'green', 'blue', 'purple', 'pink']
+
+Color1 and color2 are passed into the function updateColors respectively as the parameter 'color'.
+Arrays.prototype.push is a destructive method, hence colors is updated outside of the function block as well.
+colors is first updated to ['red', 'green', 'blue', 'purple'].
+Subsequently, the updated reference is passed to the next function call, and it is then updated to ['red', 'green', 'blue', 'purple', 'pink']
+newColors and colors are both pointing to the same array.
+
+Question 5**
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+let color = 'purple';
+let colors = ['red', 'green', 'blue'];
+
+function addColor(colors, color) {
+  colors.push(color);
+  return colors;
+}
+
+function removeColor(colors) {
+  color = colors.pop();
+  return colors;
+}
+
+let newColors = removeColor(colors);
+addColor(colors, color);
+console.log(newColors); // ['red', 'green', 'purple'];
+
+newColors and colors are both pointing to the same array in memory.
+colors.pop() is a destuctive function which amends the colors array.
+First, after removeColor is executed, we are left with the result ['red', 'green'].
+This updated array, which is the same as colors, is then passed to addColor.
+After addColor is executed, the final output is ['red', 'green', 'purple'].
+
+ANSWER: ['red', 'green', 'blue']
+A key aspect of this function though, is what happens on line 11. 
+Here we assign color to the return value of colors.pop(). 
+The pop method returns the element that it removes, so in this case that return value is the string 'blue'. 
+What is color though? Since we haven't defined a color parameter, nor declared a new variable of that name within the scope of the function, we need to look outside of the function scope. 
+The color referenced on line 11 is the global color variable that we declared on line 1. 
+Line 11 is therefore a reassignment of this variable.
+
+Question 6**
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+function capitalize() {
+  return word[0].toUpperCase() + word.slice(1);
+}
+
+function exclaim() {
+  return word += '!!!';
+}
+
+let word = 'hello';
+let capitalizedWord = capitalize(word);
+let exclaimedWord = exclaim(capitalizedWord);
+
+console.log(word); // 'hello'
+console.log(capitalizedWord); // 'Hello'
+console.log(exclaimedWord); // 'hello!!!'
+
+word is firstly printed as it is, as it was not reassigned to a new value.
+In capitalize(), which does not have any input parameters, we take the global variable word, and return the output of the function, which is 'Hello'.
+The output of capitalize() is assigned to capitalizedWord, and we then print out the result 'Hello'.
+Likewise, exclaim() also does not have any input parameters. Hence it takes the global variable 'word', and a new string is created for the output.
+The output of exclaimed is assigned to the variable exclaimedWord, and the value of 'Hello!!!' is logged to the console.
+
+ANSWER:
+- In exclaim(), we reassign the global variable `word` to the value `hello!!!`, since the function does not have any input parameters. 
+- Additionally, we also assign the global variable `exclaimedWord` to the output of exclaim(), which is the same value as `word` (but different memory addresses, as string is a primitive type and is hence pass by value)
+- in capitalize(), word has not been reassigned yet. Hence, the global variable `capitalizedWord` is assigned the value `Hello`, after evaluating the global variable `word` which has a value of `hello`
+
+GIVEN ANSWER:
+Here we have two functions, capitalize and exclaim. Neither function define any parameters, but both return a value.
+
+On line 9, we declare and initialize the global variable word to the string 'hello'.
+
+On line 10, we declare and initialize the global variable capitalizedWord to the return value of invoking capitalize. Within the body of the function a few things happen:
+
+We reference the first letter of word, which is 'h', using bracket notation and call the String method toUpperCase on it. This returns a new string 'H'.
+We call the String method slice on word, passing in the index 1 as an argument. This returns a new string 'ello'.
+We concatenate these two new strings using the + operator to form the new string 'Hello'.
+We then return this string 'Hello', and so capitalizedWord is assigned to this value.
+Note that although we passed in word as an argument to the function invocation, we don't use that argument within the function and the word referenced on line 2 is the global variable word. Since this variable is assigned to a primitive, however, nothing we do on line 2 changes it in any way.
+
+On line 11, we invoke the exclaim function, passing in the capitalizedWord variable. As with the capitalize function invocation we don't use the argument within the function. Within the function, word references the global word variable that was declared on line 9. We reassign this variable to a value with is the initial value of word ('hello') concatenated using the + operator with the string '!!!' to produce a new string 'hello!!!'. As well as reassigning word to this new string, we also return it, assigning exclaimedWord to this value.
+
+After our function invocations therefore, word and exclaimedWord have a value of 'hello!!!' and capitalizedWord has a value of 'Hello'. It is these values we see when we log the three variables on lines 13-15.
+
+Question 7
+What will the following code log to the console and why? Don't run it until you have tried to answer.
+
+function capitalize(word) {
+  return word[0].toUpperCase() + word.slice(1);
+}
+
+function exclaim(word) {
+  return word += '!!!';
+}
+
+let word = 'hello';
+let capitalizedWord = capitalize(word);
+let exclaimedWord = exclaim(capitalizedWord);
+
+console.log(word); // 'hello'
+console.log(capitalizedWord); // 'Hello'
+console.log(exclaimedWord); // 'Hello!!!'
+
+capitalize() has an input parameter of `word`, which shadows the global variable `word`.
+Hence, for capitalize(), after evaluation, the output is `Hello`, as it takes in the global variable `word` as an input to the parameter, and the result of the operation is `Hello`:
+- word[0].toUpperCase() -> result is 'H'
+- word.slice(1) -> result is 'ello'
+- both are concatenated together -> 'Hello'
+exclaim() has an input parameter of `word` as well, which also shadows the global variable `word`
+exclaim() takes in capitalizedWord as an input, and the result is `Hello!!!`, which is assigned to the global variable `exclaimedWord`
+The global variable `word ` is not reassigned, hence it retains its original value of `hello`.
