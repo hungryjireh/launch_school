@@ -5,7 +5,7 @@
 — input types: 1, 2, 3, ..., 99
 — expected output types: 1, 3, 5, ..., 99
 - rules: 1 and 99 are included
-— algo: for each number, determine if remainder === 1.
+— algo: for each number, determine if remainder % 2 === 1.
     If so, log the number
     else, skip
 */
