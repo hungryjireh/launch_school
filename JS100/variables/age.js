@@ -9,4 +9,4 @@ const ageCalculation = (age) => {
 }
 
 let age = rlSync.question('What\'s your age?\n');
-ageCalculation(parseInt(age));
+ageCalculation(parseInt(age, 10));
