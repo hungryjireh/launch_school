@@ -29,6 +29,19 @@ getNumber("4th");
 getNumber("5th");
 getNumber("last");
 
+/*
+What if the problem was looking for a number that satisfies
+some condition (e.g., a number greater than 25), instead of a specific number?
+*/
+const CHECK_NUMBER = 25;
+const isMoreThanCheckNumber = searchArray.some((number) =>
+  number > CHECK_NUMBER);
+if (isMoreThanCheckNumber) {
+  console.log(`There is at least 1 number that is more than ${CHECK_NUMBER} in ${searchArray.join(",")}.`);
+} else {
+  console.log(`There are no numbers that are more than ${CHECK_NUMBER} in ${searchArray.join(",")}.`);
+}
+
 const lastNumber = searchArray.pop();
 if (searchArray.includes(lastNumber)) {
   console.log(`The number ${lastNumber} appears in ${searchArray.join(",")}.`);
