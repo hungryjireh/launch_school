@@ -18,8 +18,8 @@ const MINUTES_PER_DEGREE = 60;
 const SECONDS_PER_MINUTE = 60;
 
 function dms(inputNumber) {
-  const inputNumberInteger = getInteger(inputNumber);
-  const validDegree = getValidDegree(Number(inputNumberInteger));
+  const degreeInteger = getInteger(inputNumber);
+  const validDegree = getValidDegree(Number(degreeInteger));
   const inputNumberDecimal = getDecimal(inputNumber);
   if (inputNumberDecimal !== 0) {
     const minute = Number(inputNumberDecimal) * MINUTES_PER_DEGREE;
