@@ -14,16 +14,19 @@
     - integer * 60 (seconds)
 */
 
+const MINUTES_PER_DEGREE = 60;
+const SECONDS_PER_MINUTE = 60;
+
 function dms(inputNumber) {
   const inputNumberInteger = getInteger(inputNumber);
   const inputNumberDecimal = getDecimal(inputNumber);
   if (inputNumberDecimal !== 0) {
-    const minute = Number(inputNumberDecimal) * 60;
+    const minute = Number(inputNumberDecimal) * MINUTES_PER_DEGREE;
     const minuteInteger = getInteger(minute);
     const minuteIntegerString = padZeroes(minuteInteger);
     const minuteDecimal = getDecimal(minute);
     if (minuteDecimal !== 0) {
-      const degree = Math.round(Number(minuteDecimal) * 60);
+      const degree = Math.round(Number(minuteDecimal) * SECONDS_PER_MINUTE);
       const degreeString = padZeroes(degree);
       return `${inputNumberInteger}°${minuteIntegerString}'${degreeString}"`;
     }
@@ -46,7 +49,7 @@ function getDecimal(floatingNumber) {
 }
 
 function padZeroes(integer) {
-  return (integer.toString().length === 2) ? `${integer}` : `0${integer}`;
+  return (integer.toString().length < 2) ? `0${integer}` : `${integer}`;
 }
 
 console.log(dms(30));           // 30°00'00"
